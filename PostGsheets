@@ -1,0 +1,19 @@
+def GetOauth():
+    url = "https://accounts.google.com/o/oauth2/token"
+    payload = "{\r\n\"client_secret\":\"H-WwaYIMP4MFmP-RJE2-5X_J\",\r\n\"grant_type\": \"refresh_token\",\r\n\"refresh_token\":\"1//04yt5o-0GTEZMCgYIARAAGAQSNwF-L9IrQu5mTb2H_hf4zKXb1N2xcrhTm3XGe9_6b1hw9AKks9JvGP1Xpc3WfNe1Dor1WZ007aw\",\r\n\"client_id\":\"932267562254-3t83u399s52cnj204kilqubvb5q65cv4.apps.googleusercontent.com\"\r\n}\r\n"
+    headers = {'Content-Type': 'text/plain'}
+    response = requests.request("POST", url, headers=headers, data=payload)
+    oauth = response.json()
+    return oauth['access_token']
+
+def POST(lista):
+    sheetid = "1yXhAFxsaSb_X1WTPgUodswv8OZ0cHnXAqjTVFUS3lWs"
+    sheet_name = "Sheet1" #"Homolog" 
+    url = f"https://sheets.googleapis.com/v4/spreadsheets/{sheetid}/values/{sheet_name}!A1:append?insertDataOption=INSERT_ROWS&responseDateTimeRenderOption=FORMATTED_STRING&valueInputOption=USER_ENTERED"
+    
+    lines = str(lista)
+    payload = '{"values":'+lines+'}'
+    headers = {'Authorization': "Bearer "+GetOauth()}           #Oauth string
+    response = requests.post(url, headers=headers, data= payload)
+    print(response.text)
+    assert response.status_code == 200
