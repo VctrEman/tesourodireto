@@ -1,6 +1,6 @@
 def GetOauth():
     url = "https://accounts.google.com/o/oauth2/token"
-    payload = "{\r\n\"client_secret\":\" client secret aquii",\r\n\"grant_type\": \"refresh_token\",\r\n\"refresh_token\":\"seu refresh token",\r\n\"client_id\":\"932267562254-3t83u399s52cnj204kilqubvb5q65cv4.apps.googleusercontent.com\"\r\n}\r\n"
+    payload = "{\r\n\"client_secret\":\" client secret aquii",\r\n\"grant_type\": \"refresh_token\",\r\n\"refresh_token\":\"seu refresh token",\r\n\"client_id\":\"o client id\"\r\n}\r\n"
     headers = {'Content-Type': 'text/plain'}
     response = requests.request("POST", url, headers=headers, data=payload)
     oauth = response.json()
