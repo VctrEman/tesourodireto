@@ -7,8 +7,8 @@ def GetOauth():
     return oauth['access_token']
 
 def POST(lista):
-    sheetid = "1yXhAFxsaSb_X1WTPgUodswv8OZ0cHnXAqjTVFUS3lWs"
-    sheet_name = "Sheet1" #"Homolog" 
+    sheetid = "id da planilha"
+    sheet_name = "nome da planilha" 
     url = f"https://sheets.googleapis.com/v4/spreadsheets/{sheetid}/values/{sheet_name}!A1:append?insertDataOption=INSERT_ROWS&responseDateTimeRenderOption=FORMATTED_STRING&valueInputOption=USER_ENTERED"
     
     lines = str(lista)
