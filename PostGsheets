@@ -1,6 +1,9 @@
 def GetOauth():
     url = "https://accounts.google.com/o/oauth2/token"
-    payload = "{\r\n\"client_secret\":\" client secret aquii",\r\n\"grant_type\": \"refresh_token\",\r\n\"refresh_token\":\"seu refresh token",\r\n\"client_id\":\"o client id\"\r\n}\r\n"
+    payload = json.dumps({  "client_id": "your cliente id",
+                            "client_secret": "your client secret",
+                            "grant_type": "refresh_token",
+                            "refresh_token": "your refresh_token"   })
     headers = {'Content-Type': 'text/plain'}
     response = requests.request("POST", url, headers=headers, data=payload)
     oauth = response.json()
@@ -15,6 +18,6 @@ def POST(values):
     lines = str(values)
     payload = '{"values":'+lines+'}'
     headers = {'Authorization': "Bearer "+GetOauth()}          
-    response = requests.post(url, headers=headers, data= payload)
+    response = requests.post(url, headers = headers, data = payload)
     print(response.text)
     assert response.status_code == 200
