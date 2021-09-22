@@ -6,14 +6,15 @@ def GetOauth():
     oauth = response.json()
     return oauth['access_token']
 
-def POST(lista):
-    sheetid = "id da planilha"
-    sheet_name = "nome da planilha" 
+def POST(values):
+    sheetid = "your sheet id"
+    sheet_name = "your sheet name" 
+    
     url = f"https://sheets.googleapis.com/v4/spreadsheets/{sheetid}/values/{sheet_name}!A1:append?insertDataOption=INSERT_ROWS&responseDateTimeRenderOption=FORMATTED_STRING&valueInputOption=USER_ENTERED"
     
-    lines = str(lista)
+    lines = str(values)
     payload = '{"values":'+lines+'}'
-    headers = {'Authorization': "Bearer "+GetOauth()}           #Oauth string
+    headers = {'Authorization': "Bearer "+GetOauth()}          
     response = requests.post(url, headers=headers, data= payload)
     print(response.text)
     assert response.status_code == 200
